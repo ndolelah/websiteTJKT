@@ -1,0 +1,737 @@
+/* ==========================================================================
+   TJKT SMART NETWORK - MODERN STYLE SHEET
+   Tema: Teknologi, Network & Communication (TJKT)
+   Warna: Navy (#0b132b, #0f172a), Biru (#2563eb, #3b82f6), Cyan (#06b6d4, #38bdf8), Putih (#ffffff)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. VARIABLES & VARIABEL TEMA (CSS CUSTOM PROPERTIES)
+   -------------------------------------------------------------------------- */
+:root {
+    /* Palet Warna Utama */
+    --color-navy-dark: #070d1e;
+    --color-navy: #0f172a;
+    --color-navy-light: #1e293b;
+    --color-blue-dark: #1d4ed8;
+    --color-blue: #2563eb;
+    --color-blue-light: #3b82f6;
+    --color-cyan-dark: #0891b2;
+    --color-cyan: #06b6d4;
+    --color-cyan-light: #38bdf8;
+    --color-cyan-glow: rgba(6, 182, 212, 0.25);
+
+    /* Warna Latar Belakang & Teks */
+    --bg-body: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-hero: linear-gradient(135deg, #0b132b 0%, #0f172a 50%, #1e293b 100%);
+    --bg-kontak: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%);
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --text-white: #ffffff;
+
+    /* Bayangan & Efek Glow */
+    --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.06);
+    --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 16px 36px rgba(15, 23, 42, 0.12);
+    --shadow-glow: 0 0 25px rgba(6, 182, 212, 0.35);
+
+    /* Transisi */
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Typography */
+    --font-family: 'Plus Jakarta Sans', Arial, Helvetica, sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET & LAYOUT DASAR
+   -------------------------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Smooth Scrolling untuk seluruh halaman */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--text-main);
+    background-color: var(--bg-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Container & Layout Utama */
+main {
+    display: block;
+    width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   3. HEADER & NAVBAR (STICKY & GLASSMORPHISM)
+   -------------------------------------------------------------------------- */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 20px 8%;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: padding var(--transition-normal), background var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+/* Efek Navbar saat halaman di-scroll */
+header.scroll {
+    padding: 14px 8%;
+    background: rgba(7, 13, 30, 0.95);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(6, 182, 212, 0.2);
+}
+
+/* Navigasi Flexbox */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Branding Logo */
+.logo-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    width: 28px;
+    height: 28px;
+    color: var(--color-cyan);
+    filter: drop-shadow(0 0 8px var(--color-cyan-glow));
+    transition: transform var(--transition-normal);
+}
+
+.logo-brand:hover .brand-icon {
+    transform: rotate(180deg);
+}
+
+nav h1 {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text-white);
+    background: linear-gradient(135deg, #ffffff 0%, var(--color-cyan-light) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+/* Menu Navigasi */
+nav ul {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+}
+
+nav a {
+    position: relative;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: capitalize;
+    padding: 6px 0;
+    transition: color var(--transition-fast);
+}
+
+/* Hover & Active Indicator pada Menu */
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-blue-light), var(--color-cyan));
+    border-radius: 2px;
+    transition: width var(--transition-normal);
+    box-shadow: var(--shadow-glow);
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--color-cyan-light);
+}
+
+nav a:hover::after,
+nav a.active::after {
+    width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   4. HERO SECTION (ANIMASI & TEKNOLOGI)
+   -------------------------------------------------------------------------- */
+.hero {
+    position: relative;
+    min-height: 580px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    padding: 100px 8% 80px 8%;
+    background: var(--bg-hero);
+    color: var(--text-white);
+    overflow: hidden;
+}
+
+/* Efek Glow & Grid pada Latar Hero */
+.hero-glow {
+    position: absolute;
+    top: -20%;
+    right: 10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.18) 0%, rgba(37, 99, 235, 0.08) 50%, rgba(0, 0, 0, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: pulseGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% {
+        transform: scale(1) translate(0, 0);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(1.2) translate(-30px, 30px);
+        opacity: 1;
+    }
+}
+
+/* Bagian Teks Hero */
+.hero-teks {
+    flex: 1;
+    max-width: 600px;
+    z-index: 2;
+}
+
+/* Badge Label */
+.badge-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: rgba(6, 182, 212, 0.12);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    border-radius: 30px;
+    margin-bottom: 20px;
+}
+
+.badge-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--color-cyan);
+    animation: blink 1.8s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.4;
+        transform: scale(0.85);
+    }
+}
+
+.label {
+    margin-bottom: 0;
+    color: var(--color-cyan-light);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Judul Utama Hero */
+.hero h2 {
+    margin-top: 0;
+    margin-bottom: 22px;
+    font-size: 46px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    min-height: 110px;
+    background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 60%, var(--color-cyan-light) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+/* Paragraf Deskripsi Hero */
+.hero-teks p {
+    margin-bottom: 36px;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #94a3b8;
+}
+
+/* Tombol CTA (Call to Action) */
+.tombol {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    color: var(--text-white);
+    background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-cyan-dark) 100%);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.tombol svg {
+    transition: transform var(--transition-normal);
+}
+
+/* Efek Hover Tombol */
+.tombol:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(6, 182, 212, 0.45);
+    background: linear-gradient(135deg, var(--color-blue-light) 0%, var(--color-cyan) 100%);
+}
+
+.tombol:hover svg {
+    transform: translateX(5px);
+}
+
+/* Bagian Gambar Hero dengan Animasi Floating */
+.hero-gambar {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.gambar-wrapper {
+    position: relative;
+    max-width: 500px;
+    border-radius: 20px;
+    padding: 8px;
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.5) 0%, rgba(37, 99, 235, 0.2) 100%);
+    box-shadow: var(--shadow-glow), 0 20px 40px rgba(0, 0, 0, 0.4);
+    animation: floatAnimation 6s ease-in-out infinite alternate;
+}
+
+@keyframes floatAnimation {
+    0% {
+        transform: translateY(0px);
+    }
+
+    100% {
+        transform: translateY(-16px);
+    }
+}
+
+.hero-gambar img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 14px;
+    object-fit: cover;
+}
+
+/* --------------------------------------------------------------------------
+   5. BAGIAN LAYANAN (SERVICES & KARTU HOVER)
+   -------------------------------------------------------------------------- */
+.layanan {
+    padding: 100px 8%;
+    max-width: 1240px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-header h2 {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--color-navy);
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.deskripsi-bagian {
+    font-size: 17px;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 50px auto;
+}
+
+/* Grid / Flex Card Layanan */
+.daftar-layanan {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+/* Kartu Layanan */
+.kartu {
+    flex: 1;
+    padding: 36px 28px;
+    background-color: var(--bg-card);
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.kartu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-blue), var(--color-cyan));
+    opacity: 0.8;
+    transition: opacity var(--transition-normal), height var(--transition-normal);
+}
+
+/* Icon Kartu */
+.kartu-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(37, 99, 235, 0.08);
+    color: var(--color-blue);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    transition: all var(--transition-normal);
+}
+
+.kartu h3 {
+    margin-top: 0;
+    margin-bottom: 14px;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-navy);
+    transition: color var(--transition-fast);
+}
+
+.kartu p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Efek Hover Kartu Layanan */
+.kartu:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg), 0 10px 25px rgba(6, 182, 212, 0.15);
+    border-color: rgba(6, 182, 212, 0.4);
+}
+
+.kartu:hover::before {
+    opacity: 1;
+    height: 6px;
+}
+
+.kartu:hover .kartu-icon {
+    background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-cyan) 100%);
+    color: var(--text-white);
+    box-shadow: var(--shadow-glow);
+    transform: scale(1.1);
+}
+
+.kartu:hover h3 {
+    color: var(--color-blue);
+}
+
+/* --------------------------------------------------------------------------
+   6. BAGIAN KONTAK
+   -------------------------------------------------------------------------- */
+.kontak {
+    padding: 90px 8%;
+    background: var(--bg-kontak);
+    text-align: center;
+    border-top: 1px solid #e2e8f0;
+}
+
+.kontak h2 {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--color-navy);
+    margin-bottom: 12px;
+}
+
+.kontak p {
+    font-size: 17px;
+    color: var(--text-muted);
+}
+
+/* Kotak Informasi Kontak */
+.informasi-kontak {
+    max-width: 580px;
+    margin: 40px auto 0 auto;
+    padding: 32px 36px;
+    background-color: var(--bg-card);
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.informasi-kontak:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+/* Item Kontak */
+.kontak-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: #f8fafc;
+    transition: background var(--transition-fast);
+}
+
+.kontak-item:hover {
+    background: #f1f5f9;
+}
+
+.kontak-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgba(6, 182, 212, 0.1);
+    color: var(--color-cyan-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.kontak-item p {
+    margin: 0;
+    font-size: 15px;
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+}
+
+.kontak-item strong {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.kontak-item span {
+    font-weight: 700;
+    color: var(--color-navy);
+    font-size: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   7. FOOTER
+   -------------------------------------------------------------------------- */
+footer {
+    padding: 40px 8%;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    background-color: var(--color-navy-dark);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-content p {
+    margin: 4px 0;
+    font-size: 15px;
+    font-weight: 600;
+
+}
+
+.sub-footer {
+    font-size: 13px !important;
+    color: #64748b;
+}
+
+/* --------------------------------------------------------------------------
+   8. TOMBOL BACK TO TOP
+   -------------------------------------------------------------------------- */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-cyan) 100%);
+    color: var(--text-white);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(6, 182, 212, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.8);
+    transition: all var(--transition-normal);
+    z-index: 999;
+}
+
+/* Tampil saat aktif (scroll ke bawah) */
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.back-to-top:hover {
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: 0 12px 25px rgba(6, 182, 212, 0.6);
+    background: linear-gradient(135deg, var(--color-blue-light) 0%, var(--color-cyan-light) 100%);
+}
+
+/* --------------------------------------------------------------------------
+   9. INTERSECTION OBSERVER ANIMASI SCROLL (REVEAL ON SCROLL)
+   -------------------------------------------------------------------------- */
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delay untuk kartu layanan */
+.daftar-layanan .kartu:nth-child(2) {
+    transition-delay: 0.15s;
+}
+
+.daftar-layanan .kartu:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+/* --------------------------------------------------------------------------
+   10. DESAIN RESPONSIVE (MEDIA QUERIES)
+   -------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 80px;
+        padding-bottom: 70px;
+        min-height: auto;
+    }
+
+    .hero-teks {
+        max-width: 100%;
+    }
+
+    .hero h2 {
+        font-size: 38px;
+        min-height: auto;
+    }
+
+    .badge-label {
+        margin: 0 auto 16px auto;
+    }
+
+    .hero-gambar {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .daftar-layanan {
+        flex-direction: column;
+    }
+
+    .kartu {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 16px 5%;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    nav ul {
+        gap: 20px;
+    }
+
+    .hero {
+        padding: 60px 5% 50px 5%;
+    }
+
+    .hero h2 {
+        font-size: 30px;
+    }
+
+    .hero-teks p {
+        font-size: 15px;
+    }
+
+    .tombol {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .layanan,
+    .kontak {
+        padding: 60px 5%;
+    }
+
+    .informasi-kontak {
+        padding: 20px;
+    }
+
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 42px;
+        height: 42px;
+    }
+}
